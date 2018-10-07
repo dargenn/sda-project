@@ -12,6 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Answer {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(columnDefinition = "TINYINT(1)")
