@@ -3,10 +3,10 @@
     <title>Index</title>
 </head>
 <body>
-<ul>
+<table>
 <#list questions as question>
-    <li>${question.title}</li>
+
 </#list>
-</ul>
+</table>
 </body>
 </html>
