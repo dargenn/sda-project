@@ -1,19 +1,14 @@
-<#import "/spring.ftl" as spring />
-
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Edit Question</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
-<form action="/questions/edit" method="post">
-    <@spring.bind "question" />
+<form action="#" th:action="@{/questions/edit}" th:object="${question}" method="post">
     <div class="form-group">
-        ID:
-        <@spring.formInput "question.id" "disabled" />
-        Tytuł:
-        <@spring.formInput "question.title"/>
+        <input type="hidden" th:field="*{id}"/>
+        <p>Title: <input type="text" th:field="*{title}"/></p>
         <button type="submit" class="btn btn-success">Zapisz</button>
     </div>
 </form>

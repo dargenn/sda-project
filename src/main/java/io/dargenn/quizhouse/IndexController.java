@@ -9,7 +9,6 @@ public class IndexController {
 
     @GetMapping(value = "/")
     public String index(Model model) {
-        System.out.println("fhuewhiufhw");
         model.addAttribute("tekst", "jkefhwiuhfiewhiufhiwh");
         return "index";
     }

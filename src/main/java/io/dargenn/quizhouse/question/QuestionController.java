@@ -2,9 +2,7 @@ package io.dargenn.quizhouse.question;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -43,7 +41,7 @@ public class QuestionController {
 
     @PostMapping(value = "/questions/edit")
     public String editQuestion(Question question, Model model) {
-        //FIXME: Zbindowac id
+        question.getAnswers().forEach(answer -> answer.setQuestion(question));
         questionService.save(question);
         return init(model);
     }
