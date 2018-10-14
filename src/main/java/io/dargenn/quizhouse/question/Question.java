@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.dargenn.quizhouse.answer.Answer;
 import io.dargenn.quizhouse.survey.Survey;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,6 +16,8 @@ import java.util.Set;
 @Entity
 @Table(name = "QUESTION")
 @Data
+@EqualsAndHashCode(exclude = {"surveys", "answers"})
+@ToString(exclude = {"surveys", "answers"})
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +25,7 @@ public class Question {
 
     private String title;
 
-    @ManyToMany(mappedBy = "questions")
+    @ManyToMany(mappedBy = "questions", cascade = CascadeType.ALL)
     private Set<Survey> surveys = new HashSet<>();
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)

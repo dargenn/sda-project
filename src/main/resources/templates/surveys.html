@@ -14,6 +14,8 @@
             <th>Creation Date</th>
             <th>Expiration Date</th>
             <th>Link</th>
+            <th>Questions</th>
+            <th>Add Question</th>
             <th></th>
             <th></th>
         </tr>
@@ -24,11 +26,26 @@
                 <td th:text="${survey.id}"></td>
                 <td th:text="${survey.title}"></td>
                 <td th:text="${survey.description}"></td>
-                <td th:text="${survey.creationDate}"></td>
-                <td th:text="${survey.expirationDate}"></td>
+                <td th:text="${{survey.creationDate}}"></td>
+                <td th:text="${{survey.expirationDate}}"></td>
                 <td th:text="${survey.link}"></td>
-                <td><a th:href="@{|/surveys/edit/${survey.id}|}" class="btn btn-primary">Edytuj</a></td>
-                <td><a th:href="@{|/surveys/remove/${survey.id}|}" class="btn btn-danger">Usun</a></td>
+                <td>
+                    <ul th:each="question : ${survey.questions}">
+                        <li th:text="${question.title}"></li>
+                    </ul>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <form th:action="@{|/surveys/addQuestion/${survey.id}|}" method="post">
+                            <select class="form-control" name="questionId">
+                                <option th:each="question : ${questions}" th:value="${question.id}" th:text="${question.title}"></option>
+                            </select>
+                            <button type="submit" class="btn btn-success">Add question</button>
+                        </form>
+                    </div>
+                </td>
+                <td><a th:href="@{|/surveys/edit/${survey.id}|}" class="btn btn-primary">Edit</a></td>
+                <td><a th:href="@{|/surveys/remove/${survey.id}|}" class="btn btn-danger">Delete</a></td>
             </tr>
         </th:block>
         </tbody>
@@ -40,6 +57,7 @@
         <div class="form-group">Expiration Date: <input type="date" th:field="*{expirationDate}" placeholder="Expiration Date"/></div>
         <div class="form-group"><button type="submit" class="btn btn-success">Dodaj ankietę</button></div>
     </form>
+    <div th:replace="fragments/footer :: footer"></div>
 </div>
 </body>
 </html>

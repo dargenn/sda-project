@@ -29,7 +29,7 @@ public class Survey {
 
     private String link;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "QUESTION_SURVEY",
             joinColumns = {@JoinColumn(name = "SURVEY_ID")},

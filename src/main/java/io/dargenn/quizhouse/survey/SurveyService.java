@@ -21,4 +21,8 @@ public class SurveyService {
         survey.setLink(UUID.randomUUID().toString());
         return surveyRepository.save(survey);
     }
+
+    public Survey findById(Long id) {
+        return surveyRepository.findById(id).orElse(new Survey());
+    }
 }
