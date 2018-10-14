@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>surveys</title>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/navbar :: navbar"></div>
+    <table class="table thead-dark col-6 col-sm-4">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Creation Date</th>
+            <th>Expiration Date</th>
+            <th>Link</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="survey : ${surveys}">
+            <tr>
+                <td th:text="${survey.id}"></td>
+                <td th:text="${survey.title}"></td>
+                <td th:text="${survey.description}"></td>
+                <td th:text="${survey.creationDate}"></td>
+                <td th:text="${survey.expirationDate}"></td>
+                <td th:text="${survey.link}"></td>
+                <td><a th:href="@{|/surveys/edit/${survey.id}|}" class="btn btn-primary">Edytuj</a></td>
+                <td><a th:href="@{|/surveys/remove/${survey.id}|}" class="btn btn-danger">Usun</a></td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    <form th:object="${survey}" th:action="@{/surveys/add}" method="post">
+        <div class="form-group">Title: <input type="text" th:field="*{title}" placeholder="Title"/></div>
+        <div class="form-group">Description: <input type="text" th:field="*{description}" placeholder="Description"/></div>
+        <div class="form-group">Creation Date: <input type="date" th:field="*{creationDate}" placeholder="Creation Date"/></div>
+        <div class="form-group">Expiration Date: <input type="date" th:field="*{expirationDate}" placeholder="Expiration Date"/></div>
+        <div class="form-group"><button type="submit" class="btn btn-success">Dodaj ankietę</button></div>
+    </form>
+</div>
+</body>
+</html>

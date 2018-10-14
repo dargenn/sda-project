@@ -2,6 +2,7 @@ package io.dargenn.quizhouse.survey;
 
 import io.dargenn.quizhouse.question.Question;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,8 +21,10 @@ public class Survey {
 
     private String description;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date creationDate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date expirationDate;
 
     private String link;
